@@ -17,7 +17,7 @@
     <template id="main-page">
         <v-ons-page>
             <v-ons-toolbar>
-                <div class="center"><img src="ocio.png" height="100%"></div>
+                <div class="center"><img src="ocio.png" height="95%"></div>
 
             </v-ons-toolbar>
             <v-ons-card>
@@ -93,7 +93,6 @@
                 this.$http.get('http://localhost:8000/player')
                     .then(response => {
                     this.player = response.body[0]
-                //this.volume = response.body[0].volume
 
             })
             },
