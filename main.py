@@ -27,18 +27,15 @@ GlobalLedInfo = {
 # PlayerInfo shows and changes current player info and settings
 class PlayerInfo:
     def on_get(self, req, resp):
-        print(GlobalPlayerInfo)
         resp.body = json.dumps([GlobalPlayerInfo])
 
     def on_post(self, req, resp):
         global GlobalPlayerInfo
         GlobalPlayerInfo = json.load(req.bounded_stream)
-        print(GlobalPlayerInfo)
-
+        dataChangeHandler()
 
 
 # LedInfo shows and changes current RGB
-
 class LedInfo:
     def on_get(self, req, resp):
         resp.body = json.dumps([GlobalLedInfo])
@@ -61,6 +58,9 @@ def add_routes(api):
     api.add_route('/led', LedInfo())
     api.add_route('/', Index())
     api.add_static_route('/', CurrDirStr + '\src')
+
+def dataChangeHandler():
+    print("Data has CHANGED")
 
 
 api = falcon.API()

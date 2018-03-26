@@ -73,15 +73,15 @@
         el: '#app',
         template: '#main-page',
         data: {'player': {
-            'status': 'No Status',
-            'volume': 0,
-            'artist': 'No Data',
-            'title': 'No Data',
-            'albumCover': 'http://i0.kym-cdn.com/entries/icons/facebook/000/007/333/276751_119503071478225_2986698_n.jpg',
-            'totalTime': '99:99',
-            'currentTime': '00:00',
-            'elapsedTime': 0
-        }},
+                'status': 'No Status',
+                'volume': 0,
+                'artist': 'No Data',
+                'title': 'No Data',
+                'albumCover': 'http://i0.kym-cdn.com/entries/icons/facebook/000/007/333/276751_119503071478225_2986698_n.jpg',
+                'totalTime': '99:99',
+                'currentTime': '00:00',
+                'elapsedTime': 0
+            }},
 
         created: function () {
             this.fetchData();
@@ -92,7 +92,7 @@
                 this.$http.get('http://localhost:8000/player')
                     .then(response => {
                     this.player = response.body[0]
-                    //this.volume = response.body[0].volume
+                //this.volume = response.body[0].volume
 
             })
             },
@@ -100,6 +100,14 @@
             sendData: function() {
                 this.$http.post('http://localhost:8000/player', this.player)
             }
+        },
+
+        mounted: function () {
+            this.fetchData();
+
+            setInterval(function () {
+                this.fetchData();
+            }.bind(this), 10000);
         }
     });
 
