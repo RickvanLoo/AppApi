@@ -7,6 +7,7 @@ config = json.load(open('./serverConfig.json'))
 CurrDirStr = str(os.getcwd());
 
 GlobalPlayerInfo = {
+    'mode': 'bluetooth',
     'status': 'Playing',
     'volume': 100,
     'artist': 'DJ Paul Elstak',
@@ -14,13 +15,15 @@ GlobalPlayerInfo = {
     'albumCover': 'https://img.discogs.com/ljTN0VrZXK5e3fh5co4obege7fY=/fit-in/600x518/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-186742-1395703236-4006.jpeg.jpg',
     'totalTime': '02:00',
     'currentTime': '00:20',
-    'elapsedTime': 20
+    'elapsedTime': 20,
+    'LEDon': True
 }
 
 GlobalLedInfo = {
     'r': 255,
     'g': 255,
-    'b': 255
+    'b': 255,
+    'a': 1
 }
 
 
@@ -39,6 +42,11 @@ class PlayerInfo:
 class LedInfo:
     def on_get(self, req, resp):
         resp.body = json.dumps([GlobalLedInfo])
+
+    def on_post(self, req, resp):
+        global GlobalLedInfo
+        GlobalLedInfo = json.load(req.bounded_stream)
+        dataChangeHandler()
 
 
 # Automatic Index Redirect
@@ -60,7 +68,8 @@ def add_routes(api):
     api.add_static_route('/', CurrDirStr + '\src')
 
 def dataChangeHandler():
-    print("Data has CHANGED")
+    print(GlobalPlayerInfo)
+    print(GlobalLedInfo)
 
 
 api = falcon.API()

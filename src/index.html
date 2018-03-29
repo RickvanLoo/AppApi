@@ -3,13 +3,13 @@
 <head>
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Colors.js/1.2.4/colors.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <script src="https://unpkg.com/vue-onsenui@2.5.1/dist/vue-onsenui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
-
-
+    <script src="vue-color.js"></script>
 
 </head>
 <body>
@@ -20,6 +20,8 @@
                 <div class="center"><img src="ocio.png" height="95%"></div>
 
             </v-ons-toolbar>
+
+            <!-- VOLUME CARD -->
             <v-ons-card>
                 <v-ons-row>
                     <v-ons-col width="40px" style="text-align: center; line-height: 31px;">
@@ -27,7 +29,8 @@
                     </v-ons-col>
                     <v-ons-col>
 
-                        <v-ons-range  v-on:change="sendData()" v-model="player.volume" style="width: 100%;"></v-ons-range>
+                        <v-ons-range v-on:change="sendDataPlayer()" v-model="player.volume"
+                                     style="width: 100%;"></v-ons-range>
 
                     </v-ons-col>
                     <v-ons-col width="40px" style="text-align: center; line-height: 31px;">
@@ -35,10 +38,47 @@
                     </v-ons-col>
                 </v-ons-row>
             </v-ons-card>
-            <v-ons-card>
+
+            <v-ons-speed-dial position="bottom right" direction="up"
+                              :visible="spdVisible"
+                              :open.sync="spdOpen"
+            >
+                <v-ons-fab>
+                    <v-ons-icon icon="fa-cog"></v-ons-icon>
+                </v-ons-fab>
+
+                <v-ons-speed-dial-item v-for="(icon, name) in shareItems"
+                                       @click="setMode(name);"
+                >
+                    <v-ons-icon :icon="icon"></v-ons-icon>
+                </v-ons-speed-dial-item>
+
+            </v-ons-speed-dial>
+            <!-- BLUETOOTH CARD -->
+            <v-ons-card v-show="this.player.mode === 'bluetooth'">
+                <div class="title">
+                    <v-ons-icon icon="fa-bluetooth"></v-ons-icon>
+                    Playing from Bluetooth
+                </div>
+
+            </v-ons-card>
+
+                        <!-- BLUETOOTH CARD -->
+            <v-ons-card v-show="this.player.mode === 'youtube'">
+                <div class="title">
+                    <v-ons-icon icon="fa-youtube"></v-ons-icon>
+                    In Progress
+                </div>
+
+            </v-ons-card>
+
+            <!-- SPOTIFY CARD -->
+            <v-ons-card v-show="this.player.mode === 'spotify'" >
                 <img :src="player.albumCover" style="width: 100%">
-                <div class="title" >
-                    {{player.status }}: {{player.title}} <br>  <h3>{{player.artist}}</h3>
+                <div class="title">
+                    <v-ons-icon icon="fa-spotify"></v-ons-icon>
+                    {{player.status }}: {{player.title}} <br>
+                    <h3>{{player.artist}}</h3>
                 </div>
 
                 <div class="content">
@@ -55,25 +95,44 @@
                             </ons-col>
                         </ons-row>
                     </div>
-                    <div>
-                        <v-ons-button><v-ons-icon icon="fa-play"></v-ons-icon></v-ons-button>
-                        <v-ons-button><v-ons-icon icon="fa-stop"></v-ons-icon></v-ons-button>
-                        <v-ons-button><v-ons-icon icon="fa-backward"></v-ons-icon></v-ons-button>
-                        <v-ons-button><v-ons-icon icon="fa-forward"></v-ons-icon></v-ons-button>
-                        <v-ons-button><v-ons-icon icon="fa-random"></v-ons-icon></v-ons-button>
-                    </div>
                 </div>
             </v-ons-card>
+
+            <!-- LED CARD-->
+            <v-ons-card>
+                <div class="title">LED Control</div>
+                <center>
+
+                    <label class="center" for="switch1">
+                        {{ player.LEDon ? 'On' : 'Off' }}
+                    </label>
+                    <v-ons-switch input-id="switch1"
+                                  v-model="player.LEDon" @click="sendDataPlayer()"
+                    >
+                    </v-ons-switch>
+
+                    <picker v-model="LED" @input="sendDataLEDDebounced()"/>
+                </center>
+            </v-ons-card>
+
+
         </v-ons-page>
     </template>
 
 </div>
 
 <script>
+    var host = 'http://130.89.143.86:8000'
+
     var vm = new Vue({
         el: '#app',
         template: '#main-page',
-        data: {'player': {
+        components: {
+            'picker': VueColor.Chrome
+        },
+        data: {
+            'player': {
+                'mode' : 'bluetooth',
                 'status': 'No Status',
                 'volume': 0,
                 'artist': 'No Data',
@@ -81,24 +140,63 @@
                 'albumCover': 'http://i0.kym-cdn.com/entries/icons/facebook/000/007/333/276751_119503071478225_2986698_n.jpg',
                 'totalTime': '99:99',
                 'currentTime': '00:00',
-                'elapsedTime': 0
-            }},
+                'elapsedTime': 0,
+                'LEDon': true
+            },
+            'LED': {
+                rgba: {r: 25, g: 77, b: 51, a: 1}
+            },
+            spdVisible: true,
+            spdOpen: false,
+            shareItems: {
+                'bluetooth': 'fa-bluetooth',
+                'youtube': 'fa-youtube',
+                'spotify': 'fa-spotify'
+            }
+        }
+        ,
 
         created: function () {
             this.fetchData();
+            this.UpdateColor;
         },
 
         methods: {
             fetchData: function () {
-                this.$http.get('http://localhost:8000/player')
+                this.$http.get(host + '/player')
                     .then(response => {
                     this.player = response.body[0]
 
             })
+                ;
+                this.$http.get(host + '/led')
+                    .then(response => {
+                    this.LED.rgba = response.body[0]
+
+            })
+                ;
             },
 
-            sendData: function() {
-                this.$http.post('http://localhost:8000/player', this.player)
+            UpdateColor: function () {
+
+            },
+
+            sendDataPlayer: function () {
+                this.$http.post(host + '/player', this.player)
+            },
+
+            sendDataLED: function () {
+                this.$http.post(host + '/led', this.LED.rgba)
+            },
+
+            sendDataLEDDebounced: _.debounce(function () {
+                this.$http.post(host + '/led', this.LED.rgba)
+
+            }, 100),
+
+            setMode: function (Name) {
+                this.player.mode = Name;
+                this.sendDataPlayer();
             }
         },
 
