@@ -59,6 +59,7 @@ def start_server(api, config):
     host = config['host']
     port = config['port']
     serve(api, host=host, port=port)
+    print('this probably never gets executed, if it does: cry for help')
 
 
 def add_routes(api):
