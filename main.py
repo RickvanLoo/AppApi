@@ -1,6 +1,8 @@
 import falcon
 import json
 import os
+#import spidev
+
 from waitress import serve
 
 config = json.load(open('./serverConfig.json'))
@@ -46,6 +48,7 @@ class LedInfo:
     def on_post(self, req, resp):
         global GlobalLedInfo
         GlobalLedInfo = json.load(req.bounded_stream)
+        sendLED(spi)
         dataChangeHandler()
 
 
@@ -72,6 +75,16 @@ def dataChangeHandler():
     print(GlobalPlayerInfo)
     print(GlobalLedInfo)
 
+def sendLED(spi):
+    RGB = [GlobalLedInfo['r'], GlobalLedInfo['g'], GlobalLedInfo['b']]
+    spi.xfer(RGB)
+
+
+spi = spidev.SpiDev()
+bus = 'a'
+device = 'a'
+spi.open(bus, device)
+sendLED(spi)
 
 api = falcon.API()
 add_routes(api)
