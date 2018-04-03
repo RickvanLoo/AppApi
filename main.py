@@ -1,7 +1,7 @@
 import falcon
 import json
 import os
-#import spidev
+import spidev
 
 from waitress import serve
 
