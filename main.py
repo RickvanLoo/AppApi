@@ -36,7 +36,7 @@ class PlayerInfo:
 
     def on_post(self, req, resp):
         global GlobalPlayerInfo
-        GlobalPlayerInfo = json.load(req.bounded_stream
+        GlobalPlayerInfo = json.load(req.bounded_stream)
         sendVolume(spi)
         dataChangeHandler()
 
