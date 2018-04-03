@@ -81,7 +81,7 @@ def sendLED(spi):
 
 
 spi = spidev.SpiDev()
-spi.open(0, 'CE1')
+spi.open(0, 1)
 spi.max_speed_hz = 1000000
 sendLED(spi)
 
