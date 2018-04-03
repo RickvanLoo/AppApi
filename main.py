@@ -77,6 +77,7 @@ def dataChangeHandler():
 
 def sendVolume(spi):
     volume = GlobalPlayerInfo['volume']
+    print volume
     spi.xfer(volume)
     print('Sending VOLUME through SPI!')
 
@@ -85,7 +86,6 @@ def sendVolume(spi):
 spi = spidev.SpiDev()
 spi.open(0, 1)
 spi.max_speed_hz = 1000000
-sendVolume(spi)
 
 api = falcon.API()
 add_routes(api)
