@@ -78,6 +78,8 @@ def dataChangeHandler():
 def sendLED(spi):
     RGB = [GlobalLedInfo['r'], GlobalLedInfo['g'], GlobalLedInfo['b']]
     spi.xfer(RGB)
+    print('Sending LED through SPI!')
+
 
 
 spi = spidev.SpiDev()
