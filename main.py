@@ -81,9 +81,8 @@ def sendLED(spi):
 
 
 spi = spidev.SpiDev()
-bus = 'a'
-device = 'a'
-spi.open(bus, device)
+spi.open(0, 'CE1')
+spi.max_speed_hz = 1000000
 sendLED(spi)
 
 api = falcon.API()
