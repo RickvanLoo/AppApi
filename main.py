@@ -69,7 +69,7 @@ def add_routes(api):
     api.add_route('/player', PlayerInfo())
     api.add_route('/led', LedInfo())
     api.add_route('/', Index())
-    api.add_static_route('/', CurrDirStr + '\src')
+    api.add_static_route('/', CurrDirStr + '/src')
 
 def dataChangeHandler():
     print(GlobalPlayerInfo)
