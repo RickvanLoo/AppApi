@@ -36,7 +36,8 @@ class PlayerInfo:
 
     def on_post(self, req, resp):
         global GlobalPlayerInfo
-        GlobalPlayerInfo = json.load(req.bounded_stream)
+        GlobalPlayerInfo = json.load(req.bounded_stream
+        sendVolume(spi)
         dataChangeHandler()
 
 
@@ -48,7 +49,6 @@ class LedInfo:
     def on_post(self, req, resp):
         global GlobalLedInfo
         GlobalLedInfo = json.load(req.bounded_stream)
-        sendLED(spi)
         dataChangeHandler()
 
 
@@ -75,17 +75,17 @@ def dataChangeHandler():
     print(GlobalPlayerInfo)
     print(GlobalLedInfo)
 
-def sendLED(spi):
-    RGB = [GlobalLedInfo['r'], GlobalLedInfo['g'], GlobalLedInfo['b']]
-    spi.xfer(RGB)
-    print('Sending LED through SPI!')
+def sendVolume(spi):
+    volume = GlobalPlayerInfo['volume']
+    spi.xfer(hex(volume))
+    print('Sending VOLUME through SPI!')
 
 
 
 spi = spidev.SpiDev()
 spi.open(0, 1)
 spi.max_speed_hz = 1000000
-sendLED(spi)
+sendVolume(spi)
 
 api = falcon.API()
 add_routes(api)
