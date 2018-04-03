@@ -76,7 +76,9 @@ def dataChangeHandler():
     print(GlobalLedInfo)
 
 def sendVolume(spi):
-    volume = GlobalPlayerInfo['volume'].encode('ascii', 'ignore')
+    volume = GlobalPlayerInfo['volume']
+    if isinstance(volume, unicode):
+        volume.encode('ascii', 'ignore')
     value_to_send = [volume]
     print volume
     print value_to_send
