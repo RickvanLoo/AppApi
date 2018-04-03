@@ -79,7 +79,7 @@ def sendVolume(spi):
     volume = GlobalPlayerInfo['volume']
     volume = int(volume)
     volume = str(volume).encode()
-    value_to_send = [volume]
+    value_to_send = [0x22]
     spi.xfer(value_to_send)
     print('Sending VOLUME through SPI!')
 
