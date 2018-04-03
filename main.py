@@ -77,7 +77,7 @@ def dataChangeHandler():
 
 def sendVolume(spi):
     volume = GlobalPlayerInfo['volume']
-    spi.xfer(hex(volume))
+    spi.xfer(volume)
     print('Sending VOLUME through SPI!')
 
 
