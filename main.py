@@ -77,9 +77,10 @@ def dataChangeHandler():
 
 def sendVolume(spi):
     volume = GlobalPlayerInfo['volume']
+    volume = str(volume)
+
     if isinstance(volume, unicode):
         print "Oh het is unicode nu"
-        volume.encode('ascii', 'ignore')
     value_to_send = [volume]
     print volume
     print value_to_send
