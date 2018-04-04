@@ -3,6 +3,7 @@ import json
 import os
 import spidev
 import dbus
+import subprocess
 
 from waitress import serve
 
