@@ -70,7 +70,7 @@
                                 {{msToTime(player.currentTime)}}
                             </ons-col>
                             <ons-col>
-                                <ons-range style="width: 100%;" :value="player.elapsedTime"></ons-range>
+                                <ons-range style="width: 100%;" :value="parseInt((player.currentTime/player.totalTime)*100)"></ons-range>
                             </ons-col>
                             <ons-col width="40px" style="text-align: center; line-height: 31px;">
                                 {{msToTime(player.totalTime)}}
