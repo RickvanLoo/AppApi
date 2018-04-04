@@ -106,7 +106,7 @@ def getBluetooth(props):
     #print BTData
     #print type(BTData)
     output = commands.getstatusoutput('sudo qdbus --system  org.bluez')
-    print output
+    print output[1]
 
     #SPI
 #spi = spidev.SpiDev()
