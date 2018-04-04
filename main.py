@@ -2,6 +2,7 @@ import falcon
 import json
 import os
 import spidev
+import dbus
 
 from waitress import serve
 
@@ -89,6 +90,11 @@ spi = spidev.SpiDev()
 spi.open(0, 1)
 spi.max_speed_hz = 1000000
 sendVolume(spi)
+
+bus = dbus.SystemBus();
+obj = bus.get_object('org.bluez', '/org/bluez')
+mp = dbus.Interface(bus.get_object("org.bluez", obj), "org.bluez.MediaPlayer1")
+mp.Pause()
 
 api = falcon.API()
 add_routes(api)
