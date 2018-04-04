@@ -225,7 +225,7 @@
             setColor: function(rgb) {
                 this.LED.rgba = rgb;
                 this.sendDataLED();
-            }
+            },
 
             sendDataPlayer: function () {
                 this.$http.post(host + '/player', this.player)
