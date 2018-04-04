@@ -91,9 +91,8 @@ spi.open(0, 1)
 spi.max_speed_hz = 1000000
 sendVolume(spi)
 
-bus = dbus.SystemBus();
-obj = bus.get_object('org.bluez', '/org/bluez')
-
+player = bus.get_object('org.bluez','/org/bluez/hci0/dev_B8_27_EB_DE_D5_FD/player0')
+BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaPlayer1')
 
 api = falcon.API()
 add_routes(api)
