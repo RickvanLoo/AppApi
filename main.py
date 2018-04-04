@@ -32,6 +32,11 @@ GlobalLedInfo = {
 }
 
 
+class PauseClass:
+    def on_get(self, req, resp):
+        print("TRYING TO PAUSE")
+        BT_Media_iface.Stop()
+
 # PlayerInfo shows and changes current player info and settings
 class PlayerInfo:
     def on_get(self, req, resp):
@@ -72,6 +77,7 @@ def start_server(api, config):
 def add_routes(api):
     api.add_route('/player', PlayerInfo())
     api.add_route('/led', LedInfo())
+    api.add_route('/pause', PauseClass())
     api.add_route('/', Index())
     api.add_static_route('/', CurrDirStr + '/src')
 
