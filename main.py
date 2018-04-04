@@ -115,6 +115,11 @@ sendVolume(spi)
 
 #Define DBUS
 bus = dbus.SystemBus()
+obj = bus.get_object('org.bluez', '/org/bluez')
+manager = dbus.Interface(obj,'org.bluez.Manager')
+obj = bus.get_object('org.bluez',manager.DefaultAdapter())
+print obj
+
 player = bus.get_object('org.bluez','/org/bluez/hci0/dev_84_98_66_0C_C1_E2')
 BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaControl1')
 BT_Media_props = dbus.Interface(player, "org.freedesktop.DBus.Properties")
