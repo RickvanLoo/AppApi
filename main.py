@@ -35,7 +35,7 @@ GlobalLedInfo = {
 # PlayerInfo shows and changes current player info and settings
 class PlayerInfo:
     def on_get(self, req, resp):
-        getBluetooth(BT_Media_props)
+        #getBluetooth(BT_Media_props)
         resp.body = json.dumps([GlobalPlayerInfo])
 
     def on_post(self, req, resp):
@@ -104,8 +104,8 @@ sendVolume(spi)
 
 #Define DBUS
 bus = dbus.SystemBus()
-player = bus.get_object('org.bluez','/org/bluez/hci0/dev_84_98_66_0C_C1_E2/player2')
-BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaPlayer1')
+player = bus.get_object('org.bluez','/org/bluez/hci0/dev_84_98_66_0C_C1_E2')
+BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaControl1')
 BT_Media_props = dbus.Interface(player, "org.freedesktop.DBus.Properties")
 
 api = falcon.API()
