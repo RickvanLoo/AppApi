@@ -79,12 +79,12 @@
                             </ons-col>
                         </ons-row>
                         <ons-row>
-                            <v-ons-button modifier="large" style="margin: 6px 0">
+                            <v-ons-button modifier="large" style="margin: 6px 0" @click="playpause()">
                                 <div v-if="this.player.status == 'playing'">
-                                    <v-ons-icon icon="fa-play"></v-ons-icon>
+                                    <v-ons-icon icon="fa-pause"></v-ons-icon>
                                 </div>
                                 <div v-else>
-                                <v-ons-icon icon="fa-pause"></v-ons-icon>
+                                <v-ons-icon icon="fa-play"></v-ons-icon>
                                 </div>
                             </v-ons-button>
                         </ons-row>
