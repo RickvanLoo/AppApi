@@ -22,6 +22,8 @@ GlobalPlayerInfo = {
     'LEDon': True
 }
 
+BTData = {"Status": "nodata", "Name": "nodata", "Track": {"Album": "nodata", "NumberOfTracks": 0, "Artist": "nodata", "Title": "nodata", "Genre": "", "Duration": 202999, "TrackNumber": 0}, "Subtype": "Audio Book", "Device": "nodata", "Position": 39952, "Type": "Audio"}
+
 GlobalLedInfo = {
     'r': 255,
     'g': 255,
@@ -87,10 +89,10 @@ def sendVolume(spi):
 
 def getBluetooth(props):
     Dict = props.GetAll("org.bluez.MediaPlayer1")
-    Jsonprops = json.dumps(Dict)
+    BTData = json.loads(Dict)
     #GlobalPlayerInfo['title'] = Jsonprops['Track']['Title']
-    print Jsonprops
-    print type(Jsonprops)
+    print BTData
+    print type(BTData)
 
 
 #SPI
