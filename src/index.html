@@ -92,32 +92,6 @@
 
             </v-ons-card>
 
-            <!-- SPOTIFY CARD -->
-            <v-ons-card v-show="this.player.mode === 'spotify'" >
-                <img :src="player.albumCover" style="width: 100%">
-                <div class="title">
-                    <v-ons-icon icon="fa-spotify"></v-ons-icon>
-                    {{player.status }}: {{player.title}} <br>
-                    <h3>{{player.artist}}</h3>
-                </div>
-
-                <div class="content">
-                    <div style="margin: 20px auto;">
-                        <ons-row>
-                            <ons-col width="40px" style="text-align: center; line-height: 31px;">
-                                {{msToTime(player.currentTime)}}
-                            </ons-col>
-                            <ons-col>
-                                <ons-range style="width: 100%;" :value="player.elapsedTime"></ons-range>
-                            </ons-col>
-                            <ons-col width="40px" style="text-align: center; line-height: 31px;">
-                                {{msToTime(player.totalTime)}}
-                            </ons-col>
-                        </ons-row>
-                    </div>
-                </div>
-            </v-ons-card>
-
             <!-- LED CARD-->
             <v-ons-card>
                 <div class="title">LED Control</div>
