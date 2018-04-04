@@ -162,7 +162,8 @@
     ColorPicker.on("mount", function (color) {
         // Log the color's hex RGB value to the dev console
         console.log(color.hexString);
-     
+        console.log(vm.getColor());
+
     });
 
     var vm = new Vue({
@@ -198,7 +199,6 @@
 
         created: function () {
             this.fetchData();
-            this.UpdateColor();
         },
 
         methods: {
@@ -217,7 +217,8 @@
                 ;
             },
 
-            UpdateColor: function () {
+            getColor: function () {
+                return this.LED.rgba;
             },
 
             sendDataPlayer: function () {
