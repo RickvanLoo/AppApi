@@ -93,8 +93,7 @@ sendVolume(spi)
 
 bus = dbus.SystemBus();
 obj = bus.get_object('org.bluez', '/org/bluez')
-mp = dbus.Interface(bus.get_object("org.bluez", obj), "org.bluez.MediaPlayer1")
-mp.Pause()
+
 
 api = falcon.API()
 add_routes(api)
