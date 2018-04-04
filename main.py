@@ -31,6 +31,10 @@ GlobalLedInfo = {
     'a': 1
 }
 
+class InfoClass:
+    def on_get(self, req, resp):
+        Print("TRYING TO GET INFO")
+        getBluetooth(BT_Media_props)
 
 class PauseClass:
     def on_get(self, req, resp):
@@ -78,6 +82,7 @@ def add_routes(api):
     api.add_route('/player', PlayerInfo())
     api.add_route('/led', LedInfo())
     api.add_route('/pause', PauseClass())
+    api.add_route('/getinf', InfoClass())
     api.add_route('/', Index())
     api.add_static_route('/', CurrDirStr + '/src')
 
