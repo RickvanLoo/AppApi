@@ -93,7 +93,7 @@ sendVolume(spi)
 
 bus = dbus.SystemBus()
 player = bus.get_object('org.bluez','/org/bluez/hci0/dev_84_98_66_0C_C1_E2/player2')
-BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaPlayer1')
+BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaControl1')
 BT_Media_iface.VolumeUp()
 
 
