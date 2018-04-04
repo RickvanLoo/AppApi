@@ -159,6 +159,14 @@
         anticlockwise: true,
     });
 
+    function getColor(){
+        return ColorPicker.color.rgb;
+    }
+
+    function setColor(input){
+        demoColorPicker.color.rgb = input;
+    }
+
     var vm = new Vue({
         el: '#app',
         template: '#main-page',
@@ -213,7 +221,7 @@
 
             UpdateColor: function () {
                 console.log("colorpikcer")
-                console.log(ColorPicker)
+                console.log(getColor())
                 console.log("LED")
 
                 console.log(this.LED.rgba)
