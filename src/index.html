@@ -70,7 +70,9 @@
                                 {{msToTime(player.currentTime)}}
                             </ons-col>
                             <ons-col>
+                                <p>
                                 <v-ons-progress-bar :value="parseInt((player.currentTime/player.totalTime)*100)" :value="100-parseInt((player.currentTime/player.totalTime)*100)"></v-ons-progress-bar>
+                                </p>
                             </ons-col>
                             <ons-col width="40px" style="text-align: center; line-height: 31px;">
                                 {{msToTime(player.totalTime)}}
