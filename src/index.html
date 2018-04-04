@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
     <script src="lodash.min.js"></script>
+    <script src="iro.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Colors.js/1.2.4/colors.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
@@ -119,6 +120,23 @@
                 </center>
             </v-ons-card>
 
+            <v-ons-card>
+                <div class="title">LED Control</div>
+                <center>
+
+                    <label class="center" for="switch1">
+                        {{ player.LEDon ? 'On' : 'Off' }}
+                    </label>
+                    <v-ons-switch input-id="switch1"
+                                  v-model="player.LEDon" @click="sendDataPlayer()"
+                    >
+                    </v-ons-switch>
+                    <div id="color-picker-container"></div>
+
+
+                </center>
+            </v-ons-card>
+
 
         </v-ons-page>
     </template>
@@ -127,6 +145,19 @@
 
 <script>
     var host = 'http://130.89.140.89:8000'
+
+    var demoColorPicker = new iro.ColorPicker("#color-picker-container", {
+        width: 320,
+        height: 320,
+        color: {r: 255, g: 0, b: 0},
+        markerRadius: 8,
+        padding: 4,
+        sliderMargin: 24,
+        sliderHeight: 36,
+        borderWidth: 2,
+        borderColor: "#fff",
+        anticlockwise: true,
+    });
 
     var vm = new Vue({
         el: '#app',
