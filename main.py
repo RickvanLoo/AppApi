@@ -3,7 +3,7 @@ import json
 import os
 import spidev
 import dbus
-import subprocess
+import commands
 
 from waitress import serve
 
@@ -105,7 +105,7 @@ def getBluetooth(props):
     #GlobalPlayerInfo['title'] = Jsonprops['Track']['Title']
     #print BTData
     #print type(BTData)
-    output = subprocess.check_output('sudo qdbus --system  org.bluez')
+    output = commands.getstatusoutput('sudo qdbus --system  org.bluez')
     print output
 
     #SPI
