@@ -159,7 +159,7 @@
         anticlockwise: true,
     });
 
-    ColorPicker.on("color:change", function (color) {
+    ColorPicker.on("color:change", function (color, changes) {
         // Log the color's hex RGB value to the dev console
         console.log(color.hexString);
         // If the "H" channel has changed, log the color's HSV value too
@@ -221,7 +221,6 @@
             },
 
             UpdateColor: function () {
-                setColor(this.LED.rgba)
             },
 
             sendDataPlayer: function () {
