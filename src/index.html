@@ -63,6 +63,22 @@
 
                 {{this.player.artist}} : {{this.player.title}}
 
+                <div class="content">
+                    <div style="margin: 20px auto;">
+                        <ons-row>
+                            <ons-col width="40px" style="text-align: center; line-height: 31px;">
+                                {{msToTime(player.currentTime)}}
+                            </ons-col>
+                            <ons-col>
+                                <ons-range style="width: 100%;" :value="player.elapsedTime"></ons-range>
+                            </ons-col>
+                            <ons-col width="40px" style="text-align: center; line-height: 31px;">
+                                {{msToTime(player.totalTime)}}
+                            </ons-col>
+                        </ons-row>
+                    </div>
+                </div>
+
             </v-ons-card>
 
             <!-- BLUETOOTH CARD -->
@@ -153,7 +169,6 @@
             shareItems: {
                 'bluetooth': 'fa-bluetooth',
                 'youtube': 'fa-youtube',
-                'spotify': 'fa-spotify'
             }
         }
         ,
@@ -202,16 +217,16 @@
             },
 
             msToTime: function (duration) {
-        var milliseconds = parseInt((duration%1000)/100)
-            , seconds = parseInt((duration/1000)%60)
-            , minutes = parseInt((duration/(1000*60))%60)
-            , hours = parseInt((duration/(1000*60*60))%24);
+                var milliseconds = parseInt((duration%1000)/100)
+                    , seconds = parseInt((duration/1000)%60)
+                    , minutes = parseInt((duration/(1000*60))%60)
+                    , hours = parseInt((duration/(1000*60*60))%24);
 
-        minutes = (minutes < 10) ? "0" + minutes : minutes;
-        seconds = (seconds < 10) ? "0" + seconds : seconds;
+                minutes = (minutes < 10) ? "0" + minutes : minutes;
+                seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-        return minutes + ":" + seconds;
-    }
+                return minutes + ":" + seconds;
+            }
 
 
         },
