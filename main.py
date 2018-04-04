@@ -33,7 +33,7 @@ GlobalLedInfo = {
 
 class InfoClass:
     def on_get(self, req, resp):
-        Print("TRYING TO GET INFO")
+        print("TRYING TO GET INFO")
         getBluetooth(BT_Media_props)
 
 class PauseClass:
