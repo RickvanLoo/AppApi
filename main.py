@@ -106,9 +106,9 @@ def getBluetooth(props):
     #print BTData
     #print type(BTData)
     output = commands.getstatusoutput('sudo qdbus --system  org.bluez')
-    print output[1].split('\n')
-    for string in output:
-        print(string.find('player'))
+    array = output[1].split('\n')
+    print array
+    print type(array)
 
     #SPI
 #spi = spidev.SpiDev()
