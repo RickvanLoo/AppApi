@@ -78,6 +78,16 @@
                                 {{msToTime(player.totalTime)}}
                             </ons-col>
                         </ons-row>
+                        <ons-row>
+                            <v-ons-button modifier="large" style="margin: 6px 0">
+                                <div v-if="this.player.status == 'playing'">
+                                    <v-ons-icon icon="fa-play"></v-ons-icon>
+                                </div>
+                                <div v-else>
+                                <v-ons-icon icon="fa-pause"></v-ons-icon>
+                                </div>
+                            </v-ons-button>
+                        </ons-row>
                     </div>
                 </div>
 
@@ -193,15 +203,23 @@
             },
 
             msToTime: function (duration) {
-                var milliseconds = parseInt((duration%1000)/100)
-                    , seconds = parseInt((duration/1000)%60)
-                    , minutes = parseInt((duration/(1000*60))%60)
-                    , hours = parseInt((duration/(1000*60*60))%24);
+                var milliseconds = parseInt((duration % 1000) / 100)
+                    , seconds = parseInt((duration / 1000) % 60)
+                    , minutes = parseInt((duration / (1000 * 60)) % 60)
+                    , hours = parseInt((duration / (1000 * 60 * 60)) % 24);
 
                 minutes = (minutes < 10) ? "0" + minutes : minutes;
                 seconds = (seconds < 10) ? "0" + seconds : seconds;
 
                 return minutes + ":" + seconds;
+            },
+
+            playpause: function(){
+                if(this.player.status == 'playing'){
+                    this.$http.get(host + '/player/pause')
+                }else{
+                    this.$http.get(host + '/player/play')
+                }
             }
 
 

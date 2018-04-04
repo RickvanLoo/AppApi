@@ -42,6 +42,11 @@ class PauseClass:
         print("TRYING TO PAUSE")
         BT_Media_iface.Pause()
 
+class PlayClass
+    def on_get(self, req, resp):
+        print("TRYING TO PLAY")
+        BT_Media_iface.Play()
+
 # PlayerInfo shows and changes current player info and settings
 class PlayerInfo:
     def on_get(self, req, resp):
@@ -81,7 +86,8 @@ def start_server(api, config):
 def add_routes(api):
     api.add_route('/player', PlayerInfo())
     api.add_route('/led', LedInfo())
-    api.add_route('/pause', PauseClass())
+    api.add_route('/player/pause', PauseClass())
+    api.add_route('/player/play', PlayClass())
     api.add_route('/getinf', InfoClass())
     api.add_route('/', Index())
     api.add_static_route('/', CurrDirStr + '/src')
@@ -123,6 +129,7 @@ def UpdateDataHandler():
     GlobalPlayerInfo['artist'] = BTData['Track']['Artist']
     GlobalPlayerInfo['totalTime'] = BTData['Track']['Duration']
     GlobalPlayerInfo['currentTime'] = BTData['Position']
+    GlobalPlayerInfo['status'] = BTData['Status']
 
 
 
