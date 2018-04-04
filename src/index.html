@@ -160,11 +160,11 @@
     });
 
     ColorPicker.on("mount", function (color) {
-        // Log the color's hex RGB value to the dev console
-        console.log(color.hexString);
-        console.log(vm.getColor());
         ColorPicker.color.rgb = vm.getColor();
+    });
 
+    ColorPicker.on("input:end", function (color) {
+        vm.setColor(color.rgb);
     });
 
     var vm = new Vue({
@@ -221,6 +221,10 @@
             getColor: function () {
                 return this.LED.rgba;
             },
+
+            setColor: function(rgb) {
+                this.LED.rgba = rgb;
+            }
 
             sendDataPlayer: function () {
                 this.$http.post(host + '/player', this.player)
