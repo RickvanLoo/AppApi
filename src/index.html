@@ -3,7 +3,6 @@
 <head>
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
-    <script src="lodash.min.js"></script>
     <script src="iro.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Colors.js/1.2.4/colors.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -101,23 +100,6 @@
                     In Progress
                 </div>
 
-            </v-ons-card>
-
-            <!-- LED CARD-->
-            <v-ons-card>
-                <div class="title">LED Control</div>
-                <center>
-
-                    <label class="center" for="switch1">
-                        {{ player.LEDon ? 'On' : 'Off' }}
-                    </label>
-                    <v-ons-switch input-id="switch1"
-                                  v-model="player.LEDon" @click="sendDataPlayer()"
-                    >
-                    </v-ons-switch>
-
-                    <picker v-model="LED" @input="sendDataLEDDebounced()"/>
-                </center>
             </v-ons-card>
 
             <v-ons-card>
@@ -234,11 +216,6 @@
             sendDataLED: function () {
                 this.$http.post(host + '/led', this.LED.rgba)
             },
-
-            sendDataLEDDebounced: _.debounce(function () {
-                this.$http.post(host + '/led', this.LED.rgba)
-
-            }, 100),
 
             setMode: function (Name) {
                 this.player.mode = Name;
