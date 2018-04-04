@@ -97,7 +97,7 @@ BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaPlayer1')
 BT_Media_props = dbus.Interface(player, "org.freedesktop.DBus.Properties")
 
 props = BT_Media_props.GetAll("org.bluez.MediaPlayer1")
-print props
+print props['album']
 
 
 api = falcon.API()
