@@ -45,13 +45,12 @@ class PauseClass:
 # PlayerInfo shows and changes current player info and settings
 class PlayerInfo:
     def on_get(self, req, resp):
-        #getBluetooth(BT_Media_props)
+        UpdateDataHandler()
         resp.body = json.dumps([GlobalPlayerInfo])
 
     def on_post(self, req, resp):
         global GlobalPlayerInfo
         GlobalPlayerInfo = json.load(req.bounded_stream)
-        sendVolume(spi)
         dataChangeHandler()
 
 
@@ -100,15 +99,15 @@ def sendVolume(spi):
     print('Sending VOLUME through SPI!')
 
 
-def getBluetooth(props):
+#Gets Bluetooth music information
+def getBluetoothData(props):
     Dict = props.GetAll("org.bluez.MediaPlayer1")
     global BTData
     Data = json.dumps(Dict)
-    #GlobalPlayerInfo['title'] = Jsonprops['Track']['Title']
     BTData = json.loads(Data)
     print BTData
 
-
+#Gets default player Bluetooth address
 def getbtaddress():
     output = commands.getstatusoutput('sudo qdbus --system  org.bluez')
     array = output[1].split('\n')
@@ -116,7 +115,15 @@ def getbtaddress():
         if 'player' in ad:
             return ad
 
-    #SPI
+def UpdateDataHandler():
+    getBluetoothData(BT_Media_props)
+    global BTData
+    global GlobalPlayerInfo
+    GlobalPlayerInfo['title'] = BTData['Track']['Title']
+    GlobalPlayerInfo['artist'] = BTData['Track']['Artist']
+
+
+#SPI
 #spi = spidev.SpiDev()
 #spi.open(0, 1)
 #spi.max_speed_hz = 1000000
