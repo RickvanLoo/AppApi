@@ -217,11 +217,9 @@
             playpause: function(){
                 if(this.player.status == 'playing'){
                     this.$http.get(host + '/player/pause')
-                    this.player.status = 'paused'
                     this.fetchData()
                 }else{
                     this.$http.get(host + '/player/play')
-                    this.player.status = 'playing'
                     this.fetchData()
                 }
             }
