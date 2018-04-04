@@ -40,7 +40,7 @@ class InfoClass:
 class PauseClass:
     def on_get(self, req, resp):
         print("TRYING TO PAUSE")
-        BT_Media_iface.Stop()
+        BT_Media_iface.Pause()
 
 # PlayerInfo shows and changes current player info and settings
 class PlayerInfo:
@@ -105,13 +105,13 @@ def getBluetooth(props):
     #GlobalPlayerInfo['title'] = Jsonprops['Track']['Title']
     #print BTData
     #print type(BTData)
+
+def getBTAddress():
     output = commands.getstatusoutput('sudo qdbus --system  org.bluez')
     array = output[1].split('\n')
-    print array
-    print type(array)
     for ad in array:
         if 'player' in ad:
-            print ad
+            return ad
 
     #SPI
 #spi = spidev.SpiDev()
@@ -122,9 +122,9 @@ def getBluetooth(props):
 
 #Define DBUS
 bus = dbus.SystemBus()
-
-player = bus.get_object('org.bluez','/org/bluez/hci0/dev_84_98_66_0C_C1_E2')
-BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaControl1')
+BTAddress = getBTAddress()
+player = bus.get_object('org.bluez', BTAddress)
+BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaPlayer1')
 BT_Media_props = dbus.Interface(player, "org.freedesktop.DBus.Properties")
 
 
