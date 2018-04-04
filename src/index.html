@@ -212,7 +212,12 @@
             },
 
             UpdateColor: function () {
+                console.log(ColorPicker.color.rgb)
+                console.log(this.LED.rgba)
+
                 ColorPicker.color.rgb = this.LED.rgba;
+                console.log(ColorPicker.color.rgb)
+
             },
 
             sendDataPlayer: function () {
