@@ -85,7 +85,7 @@ def sendVolume(spi):
     spi.xfer(value_to_send)
     print('Sending VOLUME through SPI!')
 
-def getBluetooth(props)
+def getBluetooth(props):
     Dict = props.GetAll("org.bluez.MediaPlayer1")
     Jsonprops = json.dumps(Dict)
     GlobalPlayerInfo['title'] = Jsonprops['Track']['Title']
