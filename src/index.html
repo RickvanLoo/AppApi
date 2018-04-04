@@ -65,7 +65,7 @@
 
             </v-ons-card>
 
-                        <!-- BLUETOOTH CARD -->
+            <!-- BLUETOOTH CARD -->
             <v-ons-card v-show="this.player.mode === 'youtube'">
                 <div class="title">
                     <v-ons-icon icon="fa-youtube"></v-ons-icon>
@@ -87,13 +87,13 @@
                     <div style="margin: 20px auto;">
                         <ons-row>
                             <ons-col width="40px" style="text-align: center; line-height: 31px;">
-                                {{player.currentTime}}
+                                {{msToTime(player.currentTime)}}
                             </ons-col>
                             <ons-col>
                                 <ons-range style="width: 100%;" :value="player.elapsedTime"></ons-range>
                             </ons-col>
                             <ons-col width="40px" style="text-align: center; line-height: 31px;">
-                                {{player.totalTime}}
+                                {{msToTime(player.totalTime)}}
                             </ons-col>
                         </ons-row>
                     </div>
@@ -210,6 +210,19 @@
             }.bind(this), 1000);
         }
     });
+
+    function msToTime(duration) {
+        var milliseconds = parseInt((duration%1000)/100)
+            , seconds = parseInt((duration/1000)%60)
+            , minutes = parseInt((duration/(1000*60))%60)
+            , hours = parseInt((duration/(1000*60*60))%24);
+
+        hours = (hours < 10) ? "0" + hours : hours;
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+    }
 
 </script>
 </body>

@@ -17,8 +17,8 @@ GlobalPlayerInfo = {
     'artist': 'DJ Paul Elstak',
     'title': 'Rainbow in the Sky',
     'albumCover': 'https://img.discogs.com/ljTN0VrZXK5e3fh5co4obege7fY=/fit-in/600x518/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-186742-1395703236-4006.jpeg.jpg',
-    'totalTime': '02:00',
-    'currentTime': '00:20',
+    'totalTime': '309991',
+    'currentTime': '239991',
     'elapsedTime': 20,
     'LEDon': True
 }
@@ -121,6 +121,10 @@ def UpdateDataHandler():
     global GlobalPlayerInfo
     GlobalPlayerInfo['title'] = BTData['Track']['Title']
     GlobalPlayerInfo['artist'] = BTData['Track']['Artist']
+    GlobalPlayerInfo['totalTime'] = BTData['Track']['Duration']
+    GlobalPlayerInfo['currentTime'] = BTData['Position']
+
+
 
 
 #SPI
