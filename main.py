@@ -109,6 +109,9 @@ def getBluetooth(props):
     array = output[1].split('\n')
     print array
     print type(array)
+    for ad in array:
+        if 'player' in ad:
+            print ad
 
     #SPI
 #spi = spidev.SpiDev()
