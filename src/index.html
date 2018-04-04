@@ -166,7 +166,7 @@
     function setColor(input){
         console.log(input)
         iro.ColorPicker("#color-picker-container").color.rgb = input;
-        console.log(ColorPicker.color.rgb)
+        console.log(iro.ColorPicker("#color-picker-container").color.rgb)
     }
 
     var vm = new Vue({
@@ -223,7 +223,6 @@
 
             UpdateColor: function () {
                 setColor(this.LED.rgba)
-
             },
 
             sendDataPlayer: function () {
