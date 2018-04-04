@@ -99,14 +99,17 @@ def sendVolume(spi):
     spi.xfer(value_to_send)
     print('Sending VOLUME through SPI!')
 
+
 def getBluetooth(props):
+    print('werktniet')
     #Dict = props.GetAll("org.bluez.MediaPlayer1")
     #BTData = json.loads(Dict)
     #GlobalPlayerInfo['title'] = Jsonprops['Track']['Title']
     #print BTData
     #print type(BTData)
 
-def getBTAddress():
+
+def getbtaddress():
     output = commands.getstatusoutput('sudo qdbus --system  org.bluez')
     array = output[1].split('\n')
     for ad in array:
@@ -122,7 +125,7 @@ def getBTAddress():
 
 #Define DBUS
 bus = dbus.SystemBus()
-BTAddress = getBTAddress()
+BTAddress = getbtaddress()
 player = bus.get_object('org.bluez', BTAddress)
 BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaPlayer1')
 BT_Media_props = dbus.Interface(player, "org.freedesktop.DBus.Properties")
