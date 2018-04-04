@@ -164,7 +164,9 @@
     }
 
     function setColor(input){
+        console.log(input)
         ColorPicker.color.rgb = input;
+        console.log(ColorPicker.color.rgb)
     }
 
     var vm = new Vue({
@@ -220,13 +222,7 @@
             },
 
             UpdateColor: function () {
-                console.log("colorpikcer")
-                console.log(ColorPicker)
-                console.log("LED")
-
-                console.log(this.LED.rgba)
-
-                ColorPicker.color = this.LED.rgba;
+                setColor(this.LED.rgba)
 
             },
 
