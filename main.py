@@ -99,14 +99,15 @@ def sendVolume(spi):
     print('Sending VOLUME through SPI!')
 
 def getBluetooth(props):
-    Dict = props.GetAll("org.bluez.MediaPlayer1")
-    BTData = json.loads(Dict)
+    #Dict = props.GetAll("org.bluez.MediaPlayer1")
+    #BTData = json.loads(Dict)
     #GlobalPlayerInfo['title'] = Jsonprops['Track']['Title']
-    print BTData
-    print type(BTData)
+    #print BTData
+    #print type(BTData)
+    output = subprocess.check_output('sudo qdbus --system  org.bluez')
+    print output
 
-
-#SPI
+    #SPI
 spi = spidev.SpiDev()
 spi.open(0, 1)
 spi.max_speed_hz = 1000000
@@ -115,14 +116,11 @@ sendVolume(spi)
 
 #Define DBUS
 bus = dbus.SystemBus()
-obj = bus.get_object('org.bluez', '/org/bluez')
-manager = dbus.Interface(obj,'org.bluez.Manager')
-obj = bus.get_object('org.bluez',manager.DefaultAdapter())
-print obj
 
 player = bus.get_object('org.bluez','/org/bluez/hci0/dev_84_98_66_0C_C1_E2')
 BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaControl1')
 BT_Media_props = dbus.Interface(player, "org.freedesktop.DBus.Properties")
+
 
 api = falcon.API()
 add_routes(api)
