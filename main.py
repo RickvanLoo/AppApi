@@ -28,8 +28,7 @@ BTData = {"Status": "nodata", "Name": "nodata", "Track": {"Album": "nodata", "Nu
 GlobalLedInfo = {
     'r': 255,
     'g': 255,
-    'b': 255,
-    'a': 1
+    'b': 255
 }
 
 class InfoClass:
