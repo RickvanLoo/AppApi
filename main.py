@@ -33,6 +33,7 @@ GlobalLedInfo = {
 # PlayerInfo shows and changes current player info and settings
 class PlayerInfo:
     def on_get(self, req, resp):
+        getBluetooth(BT_Media_props)
         resp.body = json.dumps([GlobalPlayerInfo])
 
     def on_post(self, req, resp):
@@ -84,21 +85,26 @@ def sendVolume(spi):
     spi.xfer(value_to_send)
     print('Sending VOLUME through SPI!')
 
+def getBluetooth(props)
+    Dict = props.GetAll("org.bluez.MediaPlayer1")
+    Jsonprops = json.dumps(Dict)
+    GlobalPlayerInfo['title'] = Jsonprops['Track']['Title']
+    print Jsonprops['Track']['Title']
 
 
+
+#SPI
 spi = spidev.SpiDev()
 spi.open(0, 1)
 spi.max_speed_hz = 1000000
 sendVolume(spi)
 
+
+#Define DBUS
 bus = dbus.SystemBus()
 player = bus.get_object('org.bluez','/org/bluez/hci0/dev_84_98_66_0C_C1_E2/player2')
 BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaPlayer1')
 BT_Media_props = dbus.Interface(player, "org.freedesktop.DBus.Properties")
-
-props = BT_Media_props.GetAll("org.bluez.MediaPlayer1")
-print json.dumps(props)
-
 
 api = falcon.API()
 add_routes(api)
