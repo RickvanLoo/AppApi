@@ -89,7 +89,7 @@ def getBluetooth(props):
     Dict = props.GetAll("org.bluez.MediaPlayer1")
     Jsonprops = json.dumps(Dict)
     #GlobalPlayerInfo['title'] = Jsonprops['Track']['Title']
-    print Jsonprops['Track']['Title']
+    print Jsonprops.get('Track')
 
 
 
