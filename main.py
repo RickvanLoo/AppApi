@@ -103,11 +103,10 @@ def sendVolume(spi):
 def getBluetooth(props):
     Dict = props.GetAll("org.bluez.MediaPlayer1")
     global BTData
-    print BTData['Status']
-    BTData = json.dumps(Dict)
+    Data = json.dumps(Dict)
     #GlobalPlayerInfo['title'] = Jsonprops['Track']['Title']
-    print BTData['Status']
-    print type(BTData)
+    BTData = json.loads(Data)
+    print BTData
 
 
 def getbtaddress():
