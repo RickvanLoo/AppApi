@@ -159,13 +159,10 @@
         anticlockwise: true,
     });
 
-    ColorPicker.on("color:change", function (color, changes) {
+    ColorPicker.on("mount", function (color) {
         // Log the color's hex RGB value to the dev console
         console.log(color.hexString);
-        // If the "H" channel has changed, log the color's HSV value too
-        if (changes.h) {
-            console.log(color.rgb);
-        }
+     
     });
 
     var vm = new Vue({
