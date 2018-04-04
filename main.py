@@ -42,7 +42,7 @@ class PauseClass:
         print("TRYING TO PAUSE")
         BT_Media_iface.Pause()
 
-class PlayClass
+class PlayClass:
     def on_get(self, req, resp):
         print("TRYING TO PLAY")
         BT_Media_iface.Play()
