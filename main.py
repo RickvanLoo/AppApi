@@ -100,7 +100,7 @@ def sendVolume(spi):
     volume = int(volume)
 
 
-    value_to_send = [hex(volume)]
+    value_to_send = [volume]
     spi.xfer(value_to_send)
     print('Sending VOLUME through SPI!')
 
