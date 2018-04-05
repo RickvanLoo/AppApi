@@ -1,4 +1,4 @@
-var host = 'http://130.89.140.89:8000'
+var host = 'http://wlan140089.mobiel.utwente.nl:8000'
 
 var ColorPicker = new iro.ColorPicker("#color-picker-container", {
     width: 320,
