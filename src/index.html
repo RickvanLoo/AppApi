@@ -9,8 +9,6 @@
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <script src="https://unpkg.com/vue-onsenui@2.5.1/dist/vue-onsenui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
-    <script src="vue-color.js"></script>
-
 </head>
 <body>
 <div id="app">
@@ -152,9 +150,6 @@
     var vm = new Vue({
         el: '#app',
         template: '#main-page',
-        components: {
-            'picker': VueColor.Chrome
-        },
         data: {
             'player': {
                 'mode' : 'bluetooth',
@@ -255,19 +250,6 @@
             }.bind(this), 1000);
         }
     });
-
-    function msToTime(duration) {
-        var milliseconds = parseInt((duration%1000)/100)
-            , seconds = parseInt((duration/1000)%60)
-            , minutes = parseInt((duration/(1000*60))%60)
-            , hours = parseInt((duration/(1000*60*60))%24);
-
-        hours = (hours < 10) ? "0" + hours : hours;
-        minutes = (minutes < 10) ? "0" + minutes : minutes;
-        seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-        return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
-    }
 
 </script>
 </body>
