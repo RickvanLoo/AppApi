@@ -94,6 +94,7 @@ def add_routes(api):
 def dataChangeHandler():
     print(GlobalPlayerInfo)
     print(GlobalLedInfo)
+    sendVolume(spi)
 
 def sendVolume(spi):
     volume = GlobalPlayerInfo['volume']
