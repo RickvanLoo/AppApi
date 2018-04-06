@@ -103,8 +103,6 @@ def add_routes(api):
     api.add_static_route('/', CurrDirStr + '/src')
 
 def dataChangeHandler():
-    print(GlobalPlayerInfo)
-    print(GlobalLedInfo)
     global strip
     global GlobalLedInfo
     SetSTRIPColor(strip, GlobalLedInfo)
