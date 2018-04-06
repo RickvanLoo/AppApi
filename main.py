@@ -105,6 +105,9 @@ def add_routes(api):
 def dataChangeHandler():
     print(GlobalPlayerInfo)
     print(GlobalLedInfo)
+    global strip
+    global GlobalLedInfo
+    SetSTRIPColor(strip, GlobalLedInfo)
     sendVolume(spi)
 
 def sendVolume(spi):
