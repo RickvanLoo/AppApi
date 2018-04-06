@@ -103,9 +103,20 @@ def add_routes(api):
     api.add_static_route('/', CurrDirStr + '/src')
 
 def dataChangeHandler():
+    OffLed = {
+        'r': 0,
+        'g': 0,
+        'b': 0
+    }
+
     global strip
     global GlobalLedInfo
-    SetSTRIPColor(strip, GlobalLedInfo)
+    global GlobalPlayerInfo
+    if GlobalPlayerInfo['LEDon']:
+        SetSTRIPColor(strip, GlobalLedInfo)
+    else:
+        SetSTRIPColor(strip, OffLed)
+
     sendVolume(spi)
 
 def sendVolume(spi):
