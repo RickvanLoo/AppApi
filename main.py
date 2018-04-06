@@ -4,6 +4,7 @@ import os
 import spidev
 import dbus
 import commands
+import time
 from neopixel import *
 import RPi.GPIO as GPIO
 from waitress import serve
@@ -225,7 +226,9 @@ while player is None:
         # connect
         player = bus.get_object('org.bluez', BTAddress)
     except:
-         print("Please Connect Bluetooth")
+        print("Please Connect Bluetooth")
+        time.sleep(1)
+
 BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaPlayer1')
 BT_Media_props = dbus.Interface(player, "org.freedesktop.DBus.Properties")
 
