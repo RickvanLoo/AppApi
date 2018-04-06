@@ -225,6 +225,7 @@ while player is None:
     try:
         # connect
         player = bus.get_object('org.bluez', BTAddress)
+        print("Bluetooth connected!")
     except:
         print("Please Connect Bluetooth")
         time.sleep(1)
