@@ -5,9 +5,40 @@ import spidev
 import dbus
 import commands
 from neopixel import *
-
-
+import RPi.GPIO as GPIO
 from waitress import serve
+
+GPIO.setmode(GPIO.BCM)
+
+
+
+
+#BUTTONS
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+
+def GPIO_onoff(channel):
+    print "aan/uit"
+
+
+def GPIO_nextsong(channel):
+    print "Next Song"
+
+
+def GPIO_voldown(channel):
+    print " vol Down"
+
+
+def GPIO_volup(channel):
+    print " vol up"
+
+
+def GPIO_connect(channel):
+    print "Connect/Disconnect"
 
 # LED strip configuration:
 LED_COUNT      = 3      # Number of LED pixels.
@@ -176,6 +207,13 @@ sendVolume(spi)
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
 strip.begin()
 SetSTRIPColor(strip, GlobalLedInfo)
+
+#ADD BUTTON Interupts
+GPIO.add_event_detect(24, GPIO.RISING, callback=GPIO_onoff, bouncetime=900)
+GPIO.add_event_detect(4, GPIO.RISING, callback=GPIO_nextsong, bouncetime=900)
+GPIO.add_event_detect(27, GPIO.RISING, callback=GPIO_voldown, bouncetime=900)
+GPIO.add_event_detect(17, GPIO.RISING, callback=GPIO_volup, bouncetime=900)
+GPIO.add_event_detect(25, GPIO.RISING, callback=GPIO_connect, bouncetime=900)
 
 
 #Define DBUS
