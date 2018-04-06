@@ -151,7 +151,7 @@ def SetSTRIPColor(strip, ledinfo):
     B = ledinfo['b']
     print("Setting Color to "+str(R)+":"+str(G)+":"+str(B))
     for i in range(strip.numPixels()):
-        strip.setPixelColorRGB(i, R,G,B)
+        strip.setPixelColorRGB(i, G,R,B)
         strip.show()
 
 #SPI
