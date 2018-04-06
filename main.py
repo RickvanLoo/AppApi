@@ -219,11 +219,12 @@ GPIO.add_event_detect(25, GPIO.RISING, callback=GPIO_connect, bouncetime=900)
 
 #Define DBUS
 bus = dbus.SystemBus()
-BTAddress = getbtaddress()
+
 player = None
 while player is None:
     try:
         # connect
+        BTAddress = getbtaddress()
         player = bus.get_object('org.bluez', BTAddress)
         print("Bluetooth connected!")
     except:
