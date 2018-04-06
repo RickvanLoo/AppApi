@@ -126,7 +126,7 @@ def getBluetoothData(props):
     global BTData
     Data = json.dumps(Dict)
     BTData = json.loads(Data)
-    print BTData
+    #print BTData
 
 #Gets default player Bluetooth address
 def getbtaddress():
@@ -151,6 +151,7 @@ def SetSTRIPColor(strip, ledinfo):
     R = ledinfo['r']
     G = ledinfo['g']
     B = ledinfo['b']
+    print("Setting Color to "+R+":"+G+":"+B)
     color = Color(R,G,B)
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
