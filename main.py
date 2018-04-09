@@ -24,6 +24,26 @@ GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
+#LED COLORS
+OffLed = {
+    'r': 0,
+    'g': 0,
+    'b': 0
+}
+
+BlueLed = {
+    'r': 0,
+    'g': 0,
+    'b': 255
+}
+
+GreenLed = {
+    'r': 0,
+    'g': 255,
+    'b': 0
+}
+
+
 def GPIO_onoff(channel):
     print "aan/uit"
 
@@ -220,7 +240,7 @@ sendVolume(spi)
 #LED SHIT
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
 strip.begin()
-SetSTRIPColor(strip, GlobalLedInfo)
+SetSTRIPColor(strip, OffLed)
 
 #ADD BUTTON Interupts
 GPIO.add_event_detect(24, GPIO.RISING, callback=GPIO_onoff, bouncetime=900)
@@ -241,18 +261,8 @@ while player is None:
         player = bus.get_object('org.bluez', BTAddress)
         print("Bluetooth connected!")
         BluetoothState = True
+        SetSTRIPColor(strip, GreenLed)
     except:
-        OffLed = {
-            'r': 0,
-            'g': 0,
-            'b': 0
-        }
-
-        BlueLed = {
-            'r': 0,
-            'g': 0,
-            'b': 255
-        }
         print("Please Connect Bluetooth")
         time.sleep(0.5)
         SetSTRIPColor(strip, OffLed)
