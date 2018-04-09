@@ -235,7 +235,6 @@ bus = dbus.SystemBus()
 
 player = None
 while player is None:
-    global BluetoothState
     try:
         # connect
         BTAddress = getbtaddress()
