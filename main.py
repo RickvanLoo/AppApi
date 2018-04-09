@@ -43,13 +43,15 @@ def GPIO_pauseplay(channel):
 def GPIO_voldown(channel):
     print "vol Down"
     global GlobalPlayerInfo
-    GlobalPlayerInfo['volume'] = GlobalPlayerInfo['volume'] - 10
+    if GlobalPlayerInfo['volume'] != 0:
+        GlobalPlayerInfo['volume'] = GlobalPlayerInfo['volume'] - 10
 
 
 def GPIO_volup(channel):
     print " vol up"
     global GlobalPlayerInfo
-    GlobalPlayerInfo['volume'] = GlobalPlayerInfo['volume'] + 10
+    if GlobalPlayerInfo['volume'] != 100:
+        GlobalPlayerInfo['volume'] = GlobalPlayerInfo['volume'] + 10
 
 
 def GPIO_connect(channel):
