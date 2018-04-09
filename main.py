@@ -14,6 +14,7 @@ GPIO.setmode(GPIO.BCM)
 #State for LEDs
 ReadyState = False
 BluetoothState = False
+VolumeStep = 20
 
 
 #BUTTONS
@@ -61,16 +62,21 @@ def GPIO_pauseplay(channel):
 def GPIO_voldown(channel):
     print "vol Down"
     global GlobalPlayerInfo
-    if GlobalPlayerInfo['volume'] != 0:
-        GlobalPlayerInfo['volume'] = int(GlobalPlayerInfo['volume']) - 20
-        sendVolume(spi)
+    if GlobalPlayerInfo['volume'] >= 0:
+        Vol = int(GlobalPlayerInfo['volume']) - VolumeStep
+        if Vol < 0:
+            Vol = 0
+        GlobalPlayerInfo['volume'] = Vol
 
 
 def GPIO_volup(channel):
     print "vol up"
     global GlobalPlayerInfo
-    if GlobalPlayerInfo['volume'] != 100:
-        GlobalPlayerInfo['volume'] = int(GlobalPlayerInfo['volume']) + 20
+    if GlobalPlayerInfo['volume'] <= 100:
+        Vol = int(GlobalPlayerInfo['volume']) + VolumeStep
+        if Vol > 100:
+            Vol = 100
+        GlobalPlayerInfo['volume'] = Vol
         sendVolume(spi)
 
 
