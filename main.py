@@ -37,10 +37,10 @@ BlueLed = {
     'b': 255
 }
 
-GreenLed = {
-    'r': 0,
+WhiteLed = {
+    'r': 255,
     'g': 255,
-    'b': 0
+    'b': 255
 }
 
 
@@ -261,7 +261,7 @@ while player is None:
         player = bus.get_object('org.bluez', BTAddress)
         print("Bluetooth connected!")
         BluetoothState = True
-        SetSTRIPColor(strip, GreenLed)
+        SetSTRIPColor(strip, WhiteLed)
     except:
         print("Please Connect Bluetooth")
         time.sleep(0.5)
