@@ -235,12 +235,12 @@ bus = dbus.SystemBus()
 
 player = None
 while player is None:
+    global BluetoothState
     try:
         # connect
         BTAddress = getbtaddress()
         player = bus.get_object('org.bluez', BTAddress)
         print("Bluetooth connected!")
-        global BluetoothState
         BluetoothState = True
     except:
         print("Please Connect Bluetooth")
