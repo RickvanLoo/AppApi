@@ -242,8 +242,23 @@ while player is None:
         print("Bluetooth connected!")
         BluetoothState = True
     except:
+        OffLed = {
+            'r': 0,
+            'g': 0,
+            'b': 0
+        }
+
+        BlueLed = {
+            'r': 0,
+            'g': 0,
+            'b': 255
+        }
         print("Please Connect Bluetooth")
-        time.sleep(1)
+        time.sleep(0.5)
+        SetSTRIPColor(strip, OffLed)
+        time.sleep(0.5)
+        SetSTRIPColor(strip, BlueLed)
+
 
 BT_Media_iface = dbus.Interface(player, dbus_interface='org.bluez.MediaPlayer1')
 BT_Media_props = dbus.Interface(player, "org.freedesktop.DBus.Properties")
