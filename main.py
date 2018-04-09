@@ -67,7 +67,7 @@ def GPIO_voldown(channel):
 
 
 def GPIO_volup(channel):
-    print " vol up"
+    print "vol up"
     global GlobalPlayerInfo
     if GlobalPlayerInfo['volume'] != 100:
         GlobalPlayerInfo['volume'] = int(GlobalPlayerInfo['volume']) + 20
@@ -193,7 +193,7 @@ def sendVolume(spi):
 
     value_to_send = [volume]
     spi.xfer(value_to_send)
-    print('Sending VOLUME through SPI!')
+    print('Vol: '+str(volume))
 
 
 #Gets Bluetooth music information
