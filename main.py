@@ -16,8 +16,6 @@ ReadyState = False
 BluetoothState = False
 
 
-
-
 #BUTTONS
 GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -138,7 +136,6 @@ def start_server(api, config):
     host = config['host']
     port = config['port']
     serve(api, host=host, port=port)
-    print('this probably never gets executed, if it does: cry for help')
 
 
 def add_routes(api):
@@ -256,4 +253,6 @@ BT_Media_props = dbus.Interface(player, "org.freedesktop.DBus.Properties")
 api = falcon.API()
 add_routes(api)
 ReadyState = True
+print("Application Ready")
 start_server(api, config)
+print('this probably never gets executed, if it does: cry for help')
