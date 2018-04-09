@@ -225,7 +225,6 @@ def SetSTRIPColor(strip, ledinfo):
     R = ledinfo['r']
     G = ledinfo['g']
     B = ledinfo['b']
-    print("Setting Color to "+str(R)+":"+str(G)+":"+str(B))
     for i in range(strip.numPixels()):
         strip.setPixelColorRGB(i, G,R,B)
         strip.show()
@@ -264,9 +263,9 @@ while player is None:
         SetSTRIPColor(strip, WhiteLed)
     except:
         print("Please Connect Bluetooth")
-        time.sleep(0.5)
+        time.sleep(0.25)
         SetSTRIPColor(strip, OffLed)
-        time.sleep(0.5)
+        time.sleep(0.25)
         SetSTRIPColor(strip, BlueLed)
 
 
