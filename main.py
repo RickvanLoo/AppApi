@@ -92,7 +92,7 @@ CurrDirStr = str(os.getcwd());
 GlobalPlayerInfo = {
     'mode': 'bluetooth',
     'status': 'playing',
-    'volume': 80,
+    'volume': 60,
     'artist': 'DJ Paul Elstak',
     'title': 'Rainbow in the Sky',
     'albumCover': 'https://img.discogs.com/ljTN0VrZXK5e3fh5co4obege7fY=/fit-in/600x518/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-186742-1395703236-4006.jpeg.jpg',
