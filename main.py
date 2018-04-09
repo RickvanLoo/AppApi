@@ -62,7 +62,7 @@ def GPIO_voldown(channel):
     print "vol Down"
     global GlobalPlayerInfo
     if GlobalPlayerInfo['volume'] != 0:
-        GlobalPlayerInfo['volume'] = int(GlobalPlayerInfo['volume']) - 10
+        GlobalPlayerInfo['volume'] = int(GlobalPlayerInfo['volume']) - 20
         sendVolume(spi)
 
 
@@ -70,7 +70,7 @@ def GPIO_volup(channel):
     print " vol up"
     global GlobalPlayerInfo
     if GlobalPlayerInfo['volume'] != 100:
-        GlobalPlayerInfo['volume'] = int(GlobalPlayerInfo['volume']) + 10
+        GlobalPlayerInfo['volume'] = int(GlobalPlayerInfo['volume']) + 20
         sendVolume(spi)
 
 
