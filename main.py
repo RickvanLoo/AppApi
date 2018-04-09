@@ -11,6 +11,10 @@ from waitress import serve
 
 GPIO.setmode(GPIO.BCM)
 
+#State for LEDs
+ReadyState = False
+BluetoothState = False
+
 
 
 
@@ -26,16 +30,26 @@ def GPIO_onoff(channel):
     print "aan/uit"
 
 
-def GPIO_nextsong(channel):
-    print "Next Song"
+def GPIO_pauseplay(channel):
+    global GlobalPlayerInfo
+    if GlobalPlayerInfo['status'] == 'playing':
+        BT_Media_iface.Pause()
+        print "Paused!"
+    else:
+        BT_Media_iface.Play()
+        print "Play!"
 
 
 def GPIO_voldown(channel):
-    print " vol Down"
+    print "vol Down"
+    global GlobalPlayerInfo
+    GlobalPlayerInfo['volume'] = GlobalPlayerInfo['volume'] - 10
 
 
 def GPIO_volup(channel):
     print " vol up"
+    global GlobalPlayerInfo
+    GlobalPlayerInfo['volume'] = GlobalPlayerInfo['volume'] + 10
 
 
 def GPIO_connect(channel):
@@ -55,7 +69,7 @@ CurrDirStr = str(os.getcwd());
 
 GlobalPlayerInfo = {
     'mode': 'bluetooth',
-    'status': 'Playing',
+    'status': 'playing',
     'volume': 100,
     'artist': 'DJ Paul Elstak',
     'title': 'Rainbow in the Sky',
@@ -211,7 +225,7 @@ SetSTRIPColor(strip, GlobalLedInfo)
 
 #ADD BUTTON Interupts
 GPIO.add_event_detect(24, GPIO.RISING, callback=GPIO_onoff, bouncetime=900)
-GPIO.add_event_detect(4, GPIO.RISING, callback=GPIO_nextsong, bouncetime=900)
+GPIO.add_event_detect(4, GPIO.RISING, callback=GPIO_pauseplay, bouncetime=900)
 GPIO.add_event_detect(27, GPIO.RISING, callback=GPIO_voldown, bouncetime=900)
 GPIO.add_event_detect(17, GPIO.RISING, callback=GPIO_volup, bouncetime=900)
 GPIO.add_event_detect(25, GPIO.RISING, callback=GPIO_connect, bouncetime=900)
@@ -227,6 +241,8 @@ while player is None:
         BTAddress = getbtaddress()
         player = bus.get_object('org.bluez', BTAddress)
         print("Bluetooth connected!")
+        global BluetoothState
+        BluetoothState = True
     except:
         print("Please Connect Bluetooth")
         time.sleep(1)
@@ -237,4 +253,5 @@ BT_Media_props = dbus.Interface(player, "org.freedesktop.DBus.Properties")
 
 api = falcon.API()
 add_routes(api)
+ReadyState = True
 start_server(api, config)
