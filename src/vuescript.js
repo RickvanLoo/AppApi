@@ -1,4 +1,4 @@
-var host = 'http://130.89.139.33:8000'
+var host = 'http://130.89.138.226:8000'
 
 var ColorPicker = new iro.ColorPicker("#color-picker-container", {
     width: 320,
