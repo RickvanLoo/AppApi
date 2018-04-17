@@ -31,10 +31,8 @@ var vm = new Vue({
             'volume': 0,
             'artist': 'No Data',
             'title': 'No Data',
-            'albumCover': 'http://i0.kym-cdn.com/entries/icons/facebook/000/007/333/276751_119503071478225_2986698_n.jpg',
             'totalTime': '99:99',
             'currentTime': '00:00',
-            'elapsedTime': 0,
             'LEDon': true
         },
         'LED': {
